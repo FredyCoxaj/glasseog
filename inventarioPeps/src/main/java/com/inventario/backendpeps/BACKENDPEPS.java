@@ -1,4 +1,4 @@
-package com.inventario.inventariopeps;
+package com.inventario.backendpeps;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -8,25 +8,23 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import com.inventario.model.Usuario;
 import com.inventario.repository.UsuarioRepository;
-/**
- *
- * @author Fredy
- */
+
 @SpringBootApplication(scanBasePackages = "com.inventario")
 @EnableJpaRepositories(basePackages = "com.inventario.repository")
 @EntityScan(basePackages = "com.inventario.model")
-public class InventarioPeps {
-
-     public static void main(String[] args) {
-        SpringApplication.run(InventarioPeps.class, args);
+public class BACKENDPEPS {
+    
+    public static void main(String[] args) {
+        SpringApplication.run(BACKENDPEPS.class, args);
         System.out.println("========================================");
         System.out.println("APLICACION INICIADA");
         System.out.println("========================================");
     }
-     @Bean
+    
+    @Bean
     public CommandLineRunner initData(UsuarioRepository usuarioRepository) {
         return args -> {
-            // Usuarios con contraseñas en TEXTO PLANO
+            // Usuarios 
             if (!usuarioRepository.existsByEmail("admin@inventario.com")) {
                 Usuario admin = new Usuario();
                 admin.setNombreCompleto("Administrador Sistema");
@@ -42,7 +40,7 @@ public class InventarioPeps {
                 Usuario bodeguero = new Usuario();
                 bodeguero.setNombreCompleto("Juan Bodeguero");
                 bodeguero.setEmail("bodega@inventario.com");
-                bodeguero.setContrasenaHash("bodega123"); 
+                bodeguero.setContrasenaHash("bodega123");  
                 bodeguero.setCarnetIdentidad("BOD002");
                 bodeguero.setRol("BODEGUERO");
                 usuarioRepository.save(bodeguero);
